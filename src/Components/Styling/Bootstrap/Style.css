@@ -1,0 +1,22 @@
+.container-fluid {
+    padding: 100px;
+}
+
+.btn{
+    border-color: rgb(255, 173, 73);
+    background-color: rgb(255, 173, 73);
+    border: solid;
+    border-radius: 10px;
+}
+
+.btn:hover{
+    background: darkorange;
+    color:  rgb(255, 173, 73);
+}
+
+.content{
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 20px;
+    text-align: justify;
+}
