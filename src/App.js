@@ -1,21 +1,17 @@
-import React from "react";
-import AppHeader from "./Components/Styling/Bootstrap/header";
-import AppHero from "./Components/Styling/Bootstrap/hero";
-import Isi from "./Components/Styling/Bootstrap/Isi";
+
+import Form from "./Components/Form";
 
 
 
 
 function App() {
-  return (
+  return(
     <div className="App">
-      <header id="header">
-        <AppHeader />
-      </header>
-      <AppHero />
-      <Isi />
+      <Form />
     </div>
   )
 }
+
+
 
 export default App; 
