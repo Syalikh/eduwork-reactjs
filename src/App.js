@@ -1,5 +1,9 @@
+import React from "react";
+import Atas from "./Components/Berita/Atas";
+import Search from "./Components/Berita/Search";
 
-import Form from "./Components/Form";
+
+
 
 
 
@@ -7,7 +11,8 @@ import Form from "./Components/Form";
 function App() {
   return(
     <div className="App">
-      <Form />
+      <Atas />
+      <Search />
     </div>
   )
 }
