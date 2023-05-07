@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Container,
   Form,
@@ -10,74 +10,56 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 
-export default class Search extends React.Component {
-  constructor(props) {
-    super(props);
+export default function Search() {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const cancelRef = useRef(null);
 
-    this.state = {
-      query: "",
-      results: {},
-      loading: false,
-      message: "",
-    };
-
-    this.cancel = "";
-  }
-
-  //   call api
-  fetchSearchResult = (query) => {
+  // call api
+  const fetchSearchResult = (query) => {
     const searchUrl = `https://newsapi.org/v2/top-headlines?country=us&q=${query}&apiKey=e6bf3ac3a85e45fea8b4c157156bf036`;
 
-    if (this.cancel) {
-      this.cancel.cancel();
+    if (cancelRef.current) {
+      cancelRef.current.cancel();
     }
 
-    this.cancel = axios.CancelToken.source();
+    cancelRef.current = axios.CancelToken.source();
 
     axios
       .get(searchUrl, {
-        cancelToken: this.cancel.token,
+        cancelToken: cancelRef.current.token,
       })
       .then((res) => {
         const resultNotFoundMsg = !res.data.articles.length
           ? "Tidak ada data yang ditemukan, tolong ketik ulang"
           : "";
 
-        this.setState({
-          results: res.data.articles,
-          message: resultNotFoundMsg,
-          loading: false,
-        });
+        setResults(res.data.articles);
+        setMessage(resultNotFoundMsg);
+        setLoading(false);
         console.log(res.data.articles);
       })
       .catch((error) => {
         if (axios.isCancel(error) || error) {
-          this.setState({
-            loading: false,
-            message: "Gagal mengambil data",
-          });
+          setLoading(false);
+          setMessage("Gagal mengambil data");
         }
       });
   };
 
-  //   search bar
-  handleOnInputChange = (event) => {
+  // search bar
+  const handleOnInputChange = (event) => {
     const query = event.target.value;
-    this.setState(
-      {
-        query: query,
-        loading: true,
-        message: "",
-      },
-      () => {
-        this.fetchSearchResult(query);
-      }
-    );
+    setQuery(query);
+    setLoading(true);
+    setMessage("");
+    fetchSearchResult(query);
   };
 
-  //render search
-  renderSearchResult = () => {
-    const { results } = this.state;
+  // render search
+  const renderSearchResult = () => {
     if (Object.keys(results).length && results.length) {
       return (
         <Row className="row align-items-center justify-content-md-center">
@@ -112,40 +94,32 @@ export default class Search extends React.Component {
     }
   };
 
-  componentDidMount() {
-    this.fetchSearchResult("");
-  }
+  useEffect(() => {
+    fetchSearchResult("");
+  }, []);
 
-  render() {
-    const { query, loading, message } = this.state;
-    // console.log(this.state);
+  return (
+    <div>
+      <Container>
+        <Form.Label htmlFor="search-input"></Form.Label>
+        <Form.Control
+          type="text"
+          name="query"
+          value={query}
+          id="search-input"
+          placeholder="Search..."
+          onChange={handleOnInputChange}
+        />
+        <br />
+        {/* error message */}
 
-    return (
-      <div>
-        <Container>
-          <Form.Label htmlFor="search-input"></Form.Label>
-          <Form.Control
-            type="text"
-            name="query"
-            value={query}
-            id="search-input"
-            placeholder="Search..."
-            onChange={this.handleOnInputChange}
-          />
-          <br />
-          {/* error message */}
+        {message && <Alert variant="danger">{message}</Alert>}
 
-          {message && <Alert variant="danger">{message}</Alert>}
 
-      
+        <br />
 
-          {this.renderSearchResult("")}
-        </Container>
-
-        <div class="spinner-border text-primary">
-            <span class="visuality-hidden"></span>
-        </div>
-      </div>
-    );
-  }
+        {renderSearchResult("")}
+      </Container>
+    </div>
+  );
 }

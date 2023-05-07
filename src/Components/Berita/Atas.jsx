@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Nav, Navbar } from "react-bootstrap";
 
 
-export default class Atas extends React.Component {
-    render() {
+export function Atas () {
+   
         return(
             <Navbar bg="success" variant="dark">
         <Container>
@@ -18,6 +18,5 @@ export default class Atas extends React.Component {
       </Navbar>
         )
     }
-}
 
 
