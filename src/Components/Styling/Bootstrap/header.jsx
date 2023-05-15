@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Nav, Navbar } from "react-bootstrap";
 
 
-export default class AppHeader extends React.Component {
-    render() {
+export default function AppHeader ()  {
+     {    
         return(
             <Navbar bg="dark" variant="dark">
         <Container>
@@ -17,4 +17,5 @@ export default class AppHeader extends React.Component {
       </Navbar>
         )
     }
-}
+  }
+

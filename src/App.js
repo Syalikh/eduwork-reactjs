@@ -1,19 +1,36 @@
-import React from "react";
-import { Atas } from "./Components/Berita/Atas";
-import Search from "./Components/Berita/Search";
+import React, { Component } from "react";
+import "./App.css";
+import Navbar from "./Components/Router/Navbar";
+import Home from "./Components/Router/Pages/Home";
+import Categories from "./Components/Router/Pages/Categories";
+
+
+
 
 
 
 
 function App() {
-  return(
-    <div className="App">
-     <Atas />
-      <Search />
+  let component
+  switch (window.location.pathname) {
+     case '/':
+      component = <App/>
+      break
+    case '/home':
+      component = <Home />
+      break
+    case '/categories' :
+      component = <Categories />
+      break
+  }
+  return (
+    <div>
+      <Navbar />
+      {component}
     </div>
-  )
+    
+  );
 }
 
 
-
-export default App; 
+export default App;
