@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+img{
+  width: 10rem;
+}
+
 body{
   margin: 0;
 }
@@ -36,4 +40,52 @@ body{
   display: flex;
   align-items: center;
   padding: 1rem;
+}
+
+.wew{
+  padding: 100px;
+  background-color: black;
+}
+
+
+
+.container-fluid{
+  text-align: center;
+  background-color: aqua;
+  padding: 10rem;
+}
+
+.about-page{
+  text-decoration: black;
+  background-color: blueviolet;
+  max-width: 100%;
+  padding-bottom: 10rem;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.Tittle{
+ text-align: center;
+margin-top: 30px;
+}
+
+.Isi{
+ text-align: center;
+}
+
+.contact-page{
+  text-align: center;
+  margin-top: 10rem;
+}
+
+.kontak{
+  background-color: red;
+}
+
+.kontak1{
+  background-color: green;
+}
+
+.kontak2{
+  background-color: cyan;
 }

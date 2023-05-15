@@ -1,36 +1,22 @@
-import React, { Component } from "react";
-import "./App.css";
-import Navbar from "./Components/Router/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.css"
+import Navbar from './Components/Router/Navbar'
 import Home from "./Components/Router/Pages/Home";
-import Categories from "./Components/Router/Pages/Categories";
-
-
-
-
-
-
+import About from "./Components/Router/Pages/About";
+import Contact from "./Components/Router/Pages/Contact";
 
 function App() {
-  let component
-  switch (window.location.pathname) {
-     case '/':
-      component = <App/>
-      break
-    case '/home':
-      component = <Home />
-      break
-    case '/categories' :
-      component = <Categories />
-      break
-  }
-  return (
-    <div>
-      <Navbar />
-      {component}
-    </div>
-    
-  );
+return (
+  
+  <BrowserRouter>
+    <Navbar />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+    </Routes>
+  </BrowserRouter>
+);
 }
-
 
 export default App;

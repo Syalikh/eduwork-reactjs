@@ -3,10 +3,10 @@ export default function Navbar () {
         <a href="/" className="site-tittle">SYAFORE</a>
         <ul>
            <li>
-            <a href="/home">Home</a>
+            <a href="/about">About</a>
             </li>
             <li>
-            <a href="/categories">Categories</a>
+            <a href="/contact">Contact</a>
            </li>
         </ul>
     </nav>
